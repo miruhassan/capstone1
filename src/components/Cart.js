@@ -28,11 +28,15 @@ const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
                 <p>Phone Model: {item.phoneModel}</p>
               )}
 
-              <div className="quantity-controls">
-                <button onClick={() => updateQuantity(item.id, item.shirtSize, item.phoneModel, item.quantity - 1)}>-</button>
-                <span>{item.quantity}</span>
-                <button onClick={() => updateQuantity(item.id, item.shirtSize, item.phoneModel, item.quantity + 1)}>+</button>
-              </div>
+              {/* Display quantity controls only if it's not a subscription */}
+              {item.category !== 'subscription' && (
+                <div className="quantity-controls">
+                  <button onClick={() => updateQuantity(item.id, item.shirtSize, item.phoneModel, item.quantity - 1)}>-</button>
+                  <span>{item.quantity}</span>
+                  <button onClick={() => updateQuantity(item.id, item.shirtSize, item.phoneModel, item.quantity + 1)}>+</button>
+                </div>
+              )}
+
               <button onClick={() => removeFromCart(item.id, item.shirtSize, item.phoneModel)}>Remove</button>
             </div>
           ))}
