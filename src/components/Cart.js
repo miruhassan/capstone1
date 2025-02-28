@@ -17,12 +17,23 @@ const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
             <div key={item.id} className="cart-item">
               <h3>{item.name}</h3>
               <p>Price: ${item.price.toFixed(2)}</p>
+
+              {/* Display shirt size if available */}
+              {item.shirtSize && (
+                <p>Size: {item.shirtSize}</p>
+              )}
+
+              {/* Display phone model if available */}
+              {item.phoneModel && (
+                <p>Phone Model: {item.phoneModel}</p>
+              )}
+
               <div className="quantity-controls">
-                <button onClick={() => updateQuantity(item.id, item.quantity - 1)}>-</button>
+                <button onClick={() => updateQuantity(item.id, item.shirtSize, item.phoneModel, item.quantity - 1)}>-</button>
                 <span>{item.quantity}</span>
-                <button onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</button>
+                <button onClick={() => updateQuantity(item.id, item.shirtSize, item.phoneModel, item.quantity + 1)}>+</button>
               </div>
-              <button onClick={() => removeFromCart(item.id)}>Remove</button>
+              <button onClick={() => removeFromCart(item.id, item.shirtSize, item.phoneModel)}>Remove</button>
             </div>
           ))}
           <h3>Total: ${totalPrice.toFixed(2)}</h3>
